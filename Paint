@@ -1,0 +1,82 @@
+from tkinter import *
+
+canvas_height = 600
+canvas_width = 800
+
+color = "black"
+stick_size = 3
+
+
+def paint(event):
+    global color
+    global stick_size
+
+    x1 = event.x - stick_size
+    x2 = event.x + stick_size
+    y1 = event.y  - stick_size
+    y2 = event.y + stick_size
+
+    canvas.create_oval(x1, y1, x2, y2, fill=color, outline=color)
+
+def plus():
+    global stick_size
+    stick_size+=1
+
+
+def minus():
+    global stick_size
+    stick_size-=1
+
+def clear():
+    canvas.delete("all")
+
+def change_color(new_color):
+    global color
+    color = new_color
+
+tk = Tk()     
+
+tk.resizable(0,0)
+
+canvas = Canvas(tk, width=canvas_width, height = canvas_height, bg = "white", bd = 0)
+canvas.grid(row=2, column=0, columnspan=80)
+
+btn_plus = Button(text="+", font=("Arial", 15, "bold"),bd=0,bg="red",fg="black", command=plus)
+btn_plus.grid(row=0, column=3, columnspan=4, rowspan=2, padx=5, sticky=W+E)
+
+btn_plus = Button(text="-", font=("Arial", 15, "bold"),bd=0,bg="red",fg="black", command=minus)
+btn_plus.grid(row=0, column=7, columnspan=4, rowspan=2, padx=5, sticky=W+E)
+
+btn_clear = Button(text="CLEAR", font=("Arial", 15, "bold"),bd=0,bg="red",fg="black", command=clear)
+btn_clear.grid(row=0, column=65, columnspan=10, rowspan=2, padx=5, sticky=W+E)
+
+btn_red = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="red", command=lambda:change_color ("red"))  
+btn_red.grid(row=1, column=30, padx=2, pady=2)
+
+btn_black = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="black", command=lambda:change_color("black"))               
+btn_black.grid(row=0, column=30, padx=2, pady=2)
+
+btn_green = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="green", command=lambda:change_color("green"))               
+btn_green.grid(row=0, column=31, padx=2, pady=2)
+
+btn_violet = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="violet", command=lambda:change_color("violet"))               
+btn_violet.grid(row=1, column=31, padx=2, pady=2)
+
+btn_yellow = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="yellow", command=lambda:change_color("yellow"))               
+btn_yellow.grid(row=0, column=32, padx=2, pady=2)
+
+btn_blue = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="blue", command=lambda:change_color("blue"))               
+btn_blue.grid(row=1, column=32, padx=2, pady=2)
+
+btn_orange = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="orange", command=lambda:change_color("orange"))               
+btn_orange.grid(row=0, column=32, padx=2, pady=2)
+
+btn_violet2 = Button(text="", font=("Arial", 10, "bold"),bd=0,bg="#be03fc", command=lambda:change_color("#be03fc"))               
+btn_violet2.grid(row=1, column=32, padx=2, pady=2)
+
+btn_white = Button(text="", font=("Arial", 10, "bold"),bd=1,bg="white", command=lambda:change_color("white"))               
+btn_white.grid(row=0, column=35, padx=4, pady=4)
+
+
+canvas.bind("<B1-Motion>", paint)
+tk.mainloop()
